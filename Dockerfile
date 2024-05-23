@@ -21,10 +21,9 @@ LABEL org.opencontainers.image.description="Oracle DB Exporter"
 ENV VERSION ${VERSION:-0.1.0}
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG LEGACY_TABLESPACE
-ENV LEGACY_TABLESPACE=${LEGACY_TABLESPACE}
+ENV LEGACY_TABLESPACE=legacy_tablespace
 COPY --from=build /go/src/oracledb_exporter/oracledb_exporter /oracledb_exporter
-ADD ./default-metrics${LEGACY_TABLESPACE}.toml /default-metrics.toml
+ADD ./default-metrics.${LEGACY_TABLESPACE}.toml /default-metrics.toml
 
 ENV DATA_SOURCE_NAME system/oracle@oracle/xe
 
